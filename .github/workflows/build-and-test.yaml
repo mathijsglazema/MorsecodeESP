@@ -1,0 +1,27 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+  TARGET: armv7-unknown-linux-gnueabihf
+
+jobs:
+  build:
+    runs-on: ubunutu-latest
+    strategy:
+      matrix:
+        toolchain: [stable, beta, nightly]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Rust toolchain
+      run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }} && rustup target add ${{ env.TARGET }}
+    - name: Build
+      run: cargo build --target=${{ env.TARGET }} --verbose
+    - name: Run tests
+      run: cargo test --target=${{ env.TARGET }} --verbose

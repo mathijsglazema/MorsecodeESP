@@ -1,0 +1,11 @@
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
+
+[build]
+target = "armv7-unknown-linux-gnueabihf"
+
+[check]
+target = "armv7-unknown-linux-gnueabihf"
+
+[test]
+target = "armv7-unknown-linux-gnueabihf"
