@@ -1,6 +1,9 @@
+## MORSECODE in Rust
+[![Build and Test](https://github.com/mathijsglazema/MorsecodeESP/actions/workflows/build-and-test.yaml/badge.svg)](https://github.com/mathijsglazema/MorsecodeESP/actions/workflows/build-and-test.yaml)
+
 ## How to get setup
 1. Install Rust for your platform
-https://www.rust-lang.org/tools/install
+[Rust](https://www.rust-lang.org/tools/install)
 
 2. Clone the repo
 
