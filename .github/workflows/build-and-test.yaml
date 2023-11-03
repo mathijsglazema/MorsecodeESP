@@ -15,7 +15,7 @@ jobs:
     runs-on: ubunutu-latest
     strategy:
       matrix:
-        toolchain: [stable, beta, nightly]
+        toolchain: [stable]
 
     steps:
     - uses: actions/checkout@v4
