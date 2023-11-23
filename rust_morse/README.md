@@ -7,7 +7,11 @@
 
 2. Clone the repo
 
-3. Install the dependencies: `rustup target add armv7-unknown-linux-gnueabihf`
+3. Install the dependencies: 
+```bash
+rustup target add armv7-unknown-linux-gnueabihf \
+sudo apt-get update && sudo apt-get install build-essential
+```
 
 4. Install the compiler: `sudo apt-get install gcc-arm-linux-gnueabihf`
 

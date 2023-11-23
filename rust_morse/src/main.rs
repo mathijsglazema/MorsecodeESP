@@ -1,22 +1,29 @@
-use std::error::Error;
-use std::thread;
-use std::time::Duration;
+mod gpio;
+mod morse_interpreter;
+use std::io::{self, Write};
 
-use rppal::gpio::Gpio;
-use rppal::system::DeviceInfo;
+fn main() {
+    loop {
+        let mut input: String = String::new();
+        print!("Please enter a string: ");
+        io::stdout().flush().unwrap();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
+        let input: &str = input.trim();
 
-// Gpio uses BCM pin numbering. BCM GPIO 23 is tied to physical pin 16.
-const GPIO_LED: u8 = 23;
+        let morse_code: String = morse_interpreter::string_to_morse(input);
+        println!("{} in morse code is: {}", input, morse_code);
+        gpio::blinking_led(morse_code);
 
-fn main() -> Result<(), Box<dyn Error>> {
-    println!("Blinking an LED on a {}.", DeviceInfo::new()?.model());
-
-    let mut pin = Gpio::new()?.get(GPIO_LED)?.into_output();
-
-    // Blink the LED by setting the pin's logic level high for 500 ms.
-    pin.set_high();
-    thread::sleep(Duration::from_millis(500));
-    pin.set_low();
-
-    Ok(())
+        let mut continue_input: String = String::new();
+        print!("Would you like to continue? (y/n): ");
+        io::stdout().flush().unwrap();
+        io::stdin()
+            .read_line(&mut continue_input)
+            .expect("Failed to read line");
+        if continue_input.trim().eq_ignore_ascii_case("n") {
+            break;
+        }
+    }
 }
